@@ -53,7 +53,7 @@ class FootprintReconfigureNode:
         else:
             new_footprint = big_footprint
 
-        rospy.loginfo("Reconfiguring footprint to: {}".format(new_footprint))
+        # rospy.loginfo("Reconfiguring footprint to: {}".format(new_footprint))
         params = {'footprint': new_footprint}
         self.global_reconfigure_client.update_configuration(params)
         self.local_reconfigure_client.update_configuration(params)
