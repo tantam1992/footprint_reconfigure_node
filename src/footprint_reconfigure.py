@@ -48,12 +48,13 @@ class FootprintReconfigureNode:
 
         if self.check_is_inside_dock_area():
             new_footprint = mini_footprint
-        elif self.last_non_dock_state == "OPERATIONAL/READY":
-            new_footprint = small_footprint
         else:
-            new_footprint = big_footprint
+            if self.last_non_dock_state == "OPERATIONAL/READY":
+                new_footprint = small_footprint
+            else:
+                new_footprint = big_footprint
 
-        # rospy.loginfo("Reconfiguring footprint to: {}".format(new_footprint))
+        rospy.loginfo("Reconfiguring footprint to: {}".format(new_footprint))
         params = {'footprint': new_footprint}
         self.global_reconfigure_client.update_configuration(params)
         self.local_reconfigure_client.update_configuration(params)
